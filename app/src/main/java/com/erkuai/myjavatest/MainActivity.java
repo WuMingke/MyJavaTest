@@ -28,11 +28,22 @@ public class MainActivity extends AppCompatActivity {
 //        runnable();
 //        threadFactory();
 //        executor();
-        callable();
+//        callable();
+//        syncDemo1();
+//        syncDemo2();
+        syncDemo3();
+    }
+
+    static void syncDemo3() {
+        new Sync3().runTest();
+    }
+
+    static void syncDemo2() {
+        new Sync2().runTest();
     }
 
     static void syncDemo1() {
-
+        new Sync1().runTest();
     }
 
     static void callable() { // 有返回值的 Runnable
