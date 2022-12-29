@@ -1,14 +1,20 @@
 package com.erkuai.myjavatest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
+import android.app.IntentService;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.util.Log;
 
-import java.time.temporal.ValueRange;
-import java.util.ArrayList;
-import java.util.List;
+import com.erkuai.myjavatest.Interthreadcommunication.ThreadInteractionDemo;
+import com.erkuai.myjavatest.Interthreadcommunication.WaitDemo;
+import com.erkuai.myjavatest.androidmutil.CustomizableThreadDemo;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -31,7 +37,78 @@ public class MainActivity extends AppCompatActivity {
 //        callable();
 //        syncDemo1();
 //        syncDemo2();
-        syncDemo3();
+//        syncDemo3();
+        /*****以下 线程间通信******/
+//        runThreadInteractionDemo(); // 一个线程结束另一个线程
+//        runWaitDemo(); // 两个线程互相配合工作
+
+        /*****以下 Android多线程******/
+//        runCustomizableThreadDemo();
+
+        runHandler();
+
+//        ThreadLocal , 数据不共享，Looper设置在ThreadLocal里的
+
+//        AsyncTask 内存泄漏
+        // 被GC-root直接或间接引用的对象，不会被回收
+        // GC-root 其中一种就是 运行中的线程（静态对象、native对象）
+        // 本质上内存泄漏一小会儿是没关系的，GC它可能还晚来呢。LeakCanary的检测也是在多少秒之内的检测
+
+        /**
+         *
+         *         Executors;
+         *         AsyncTask;
+         *         HandlerThread;
+         *         IntentService;
+         *
+         *         选哪个？
+         *         Executors
+         */
+
+        // IntentService 和 Service
+
+    }
+
+    static void runHandler() {
+        Handler handler = new Handler();
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                Log.i("wmkwmk", "run: thread:" + Thread.currentThread().getName());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("wmkwmk", "run: handler:" + Thread.currentThread().getName());
+                    }
+                });
+            }
+        };
+        thread.start();
+    }
+
+    static void runThreadInteractionDemo() {
+        new ThreadInteractionDemo().runTest();
+    }
+
+    static void runWaitDemo() {
+        new WaitDemo().runTest();
+    }
+
+    static void runCustomizableThreadDemo() {
+        CustomizableThreadDemo threadDemo = new CustomizableThreadDemo();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        threadDemo.setTask(new Runnable() {
+//            @Override
+//            public void run() {
+//                Log.i("wmkwmk", "run: hahaha");
+//            }
+//        });
+        threadDemo.start();
     }
 
     static void syncDemo3() {

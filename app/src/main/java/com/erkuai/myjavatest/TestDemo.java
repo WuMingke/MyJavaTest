@@ -1,5 +1,5 @@
 package com.erkuai.myjavatest;
 
-interface TestDemo {
+public interface TestDemo {
     void runTest();
 }
