@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         runHandler();
 
 //        ThreadLocal , 数据不共享，Looper设置在ThreadLocal里的
+        // TODO: 2022/12/29 mingKE
+//        （ThreadLocal线程不安全？）
+        // TODO: 2022/12/29 mingKE
+        // 了解ReentrantLock的实现
+        // TODO: 2022/12/29 mingKE
+        // volatile 和 synchronized 的实现原理
+
 
 //        AsyncTask 内存泄漏
         // 被GC-root直接或间接引用的对象，不会被回收
