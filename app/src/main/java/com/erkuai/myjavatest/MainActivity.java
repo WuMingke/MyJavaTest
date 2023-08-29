@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 //        executor();
 //        callable();
 //        syncDemo1();
-//        syncDemo2();
+        syncDemo2();
 //        syncDemo3();
         /*****以下 线程间通信******/
 //        runThreadInteractionDemo(); // 一个线程结束另一个线程
@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         /*****以下 Android多线程******/
 //        runCustomizableThreadDemo();
 
-        runHandler();
+//        runHandler();
 
 //        ThreadLocal , 数据不共享，Looper设置在ThreadLocal里的
         // TODO: 2022/12/29 mingKE
-//        （ThreadLocal线程不安全？）
+//        （ThreadLocal线程不安全？
         // TODO: 2022/12/29 mingKE
-        // 了解ReentrantLock的实现
+        // 了解ReentrantLock、ReentrantReadWriteLock的实现
         // TODO: 2022/12/29 mingKE
         // volatile 和 synchronized 的实现原理
 
@@ -142,8 +142,9 @@ public class MainActivity extends AppCompatActivity {
 
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<String> submit = executor.submit(callable);
+
         try {
-            String s = submit.get(); // 这里是阻塞式地获取
+            String s = submit.get(); // 这里是阻塞式地获取，api只能做到这里了，要想非阻塞，用循环 while (submit.isDone()){}
             Log.i("wmkwmk", "callable: 返回：" + s);
         } catch (ExecutionException e) {
             e.printStackTrace();

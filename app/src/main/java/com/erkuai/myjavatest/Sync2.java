@@ -37,10 +37,10 @@ class Sync2 implements TestDemo {
      *
      *  这里对 x 加 volatile 修饰是没有用的，因为 x++ 不是一个原子操作
      *
-     *  这里对方法加 synchronized 修饰，使其具有原子性，它在被访问的时候，其它线程不能再访问
+     *  这里对方法加 synchronized 修饰，使其具有原子性，它在被访问的时候，其它线程不能再访问（同步性）
      *
      *  AtomicInteger ：对Int的包装，使Int具有原子性和同步性
-     *      所以 volatile 修饰的变量，可以用这些Atomic类替换
+     *      所以 volatile 修饰的变量，可以用这些AtomicXXX类替换
      *
      *
      *
