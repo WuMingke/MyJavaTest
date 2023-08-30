@@ -11,7 +11,7 @@ public class WaitDemo implements TestDemo {
 
     private synchronized void initString() {
         sharedString = "wmkwmk";
-//        notify();
+//        notify(); // 唤醒一个，但是如果有多个线程排队，这里是不安全的，所以用notifyAll
         notifyAll(); // 将等待区域的所有线程唤醒，排队拿锁
     }
 
@@ -25,6 +25,8 @@ public class WaitDemo implements TestDemo {
         }
         Log.i("wmkwmk", "content: " + sharedString);
     }
+
+    // wait 和 notifyAll 必须成对使用，而且必须是同一个monitor
 
     @Override
     public void runTest() {
@@ -57,9 +59,10 @@ public class WaitDemo implements TestDemo {
         };
         thread1.start();
 
-        // join() 方法 将调用的线程插入到当前线程的前面，先执行完，再执行当前线程
+        // join() 方法 将调用的线程插入到 当前线程 的前面，先执行完，再执行当前线程
+        // 它在哪个线程里面执行，哪个线程就是当前线程，调用它的线程会在当前线程前执行
         try {
-            thread.join(); //
+            thread.join(); // 把两个并行的线程，变成了先后关系
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

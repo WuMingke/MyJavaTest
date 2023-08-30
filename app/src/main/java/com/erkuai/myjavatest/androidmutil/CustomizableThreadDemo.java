@@ -38,6 +38,7 @@ public class CustomizableThreadDemo extends Thread {
 
         void loop() {
             while (!quit) {
+                // 为什么synchronized放在这里可以，因为在下一轮循环的时候，检查到没有锁，setTask就可以被执行
                 synchronized (this) {
                     if (task != null) {
                         task.run();

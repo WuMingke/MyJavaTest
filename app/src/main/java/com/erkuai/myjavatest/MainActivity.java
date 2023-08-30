@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
@@ -36,20 +37,29 @@ public class MainActivity extends AppCompatActivity {
 //        executor();
 //        callable();
 //        syncDemo1();
-        syncDemo2();
+//        syncDemo2();
 //        syncDemo3();
-        /*****以下 线程间通信******/
-//        runThreadInteractionDemo(); // 一个线程结束另一个线程
-//        runWaitDemo(); // 两个线程互相配合工作
+        /*****以下 Java线程间通信 3种 ******/
+        // 1 一个线程开启另一个线程
+        // 2
+        // 3
+//        runThreadInteractionDemo(); // 一个线程结束另一个线程,通过抛异常实现
+//        runWaitDemo(); // 两个线程互相配合工作，wait/notify、join、yield
 
         /*****以下 Android多线程******/
-//        runCustomizableThreadDemo();
+        runCustomizableThreadDemo();
 
 //        runHandler();
 
 //        ThreadLocal , 数据不共享，Looper设置在ThreadLocal里的
+//        Looper.prepare(); // 当前线程的ThreadLocal设置Looper
+//        Looper.myLooper(); // 从当前线程的ThreadLocal获取Looper
+//        Looper.loop(); // 开启循环
+//        线程之间的交互，是不存在真正的交流的，只能协同使用那些共享资源
+//        在不循环的线程里面插入任务到指定的不同的线程里面去做，是不可能的
         // TODO: 2022/12/29 mingKE
 //        （ThreadLocal线程不安全？
+
         // TODO: 2022/12/29 mingKE
         // 了解ReentrantLock、ReentrantReadWriteLock的实现
         // TODO: 2022/12/29 mingKE
@@ -70,9 +80,14 @@ public class MainActivity extends AppCompatActivity {
          *
          *         选哪个？
          *         Executors
+         *
+         *         Executors的关闭：executor.shutdown();
+         *         HandlerThread的关闭：handlerThread.quit(); // 这个其实就是停止 Looper 的循环
          */
 
         // IntentService 和 Service
+        // Service：后台任务的活动空间。适用场景：音乐播放器等。
+        // IntentService：执行单个任务后自动关闭的 Service
 
     }
 
